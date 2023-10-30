@@ -1,0 +1,39 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using RepositoryPattern.Data.Infrastructure;
+
+namespace RepositoryPattern.Data.Configurations
+{
+    public class AuditConfiguration : IEntityTypeConfiguration<Audit>
+    {
+        public void Configure(EntityTypeBuilder<Audit> builder)
+        {
+            builder.HasKey(x => x.Id);
+            //builder.HasNoKey();
+
+            builder.Property(x => x.TableName)
+                .IsRequired()
+                .HasColumnType("varchar")
+                .HasMaxLength(50);
+
+            //builder.Property(x => x.EntityId)
+            //    .IsRequired()
+            //    .HasColumnType("varchar")
+            //    .HasMaxLength(36);
+            builder.Property(x => x.EntityId)
+                .IsRequired();
+
+            builder.Property(x => x.ModifyDateTime)
+                .IsRequired();
+
+            //builder.Property(x => x.Property)
+            //    .IsRequired()
+            //    .HasColumnType("varchar")
+            //    .HasMaxLength(100);
+
+            builder.Property(x => x.Values)
+                .IsRequired()
+                .HasColumnType("nvarchar(max)");
+        }
+    }
+}
