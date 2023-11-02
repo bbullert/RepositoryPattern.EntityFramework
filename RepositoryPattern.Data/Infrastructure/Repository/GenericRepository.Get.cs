@@ -14,7 +14,8 @@ namespace RepositoryPattern.Data.Infrastructure
             bool disableTracking = true,
             bool ignoreQueryFilters = false)
         {
-            return Entities.Select(predicate, include, orderBy, selector => selector, null, null, disableTracking, ignoreQueryFilters).FirstOrDefault();
+            return Entities.Select(predicate, include, orderBy, selector => selector, null, null, disableTracking, ignoreQueryFilters)
+                .FirstOrDefault();
         }
 
         public virtual TResult? Get<TResult>(
@@ -25,7 +26,8 @@ namespace RepositoryPattern.Data.Infrastructure
             bool disableTracking = true,
             bool ignoreQueryFilters = false)
         {
-            return Entities.Select(predicate, include, orderBy, selector, null, null, disableTracking, ignoreQueryFilters).FirstOrDefault();
+            return Entities.Select(predicate, include, orderBy, selector, null, null, disableTracking, ignoreQueryFilters)
+                .FirstOrDefault();
         }
 
         public virtual Task<TEntity?> GetAsync(
@@ -35,7 +37,8 @@ namespace RepositoryPattern.Data.Infrastructure
             bool disableTracking = true,
             bool ignoreQueryFilters = false)
         {
-            return Entities.Select(predicate, include, orderBy, selector => selector, null, null, disableTracking, ignoreQueryFilters).FirstOrDefaultAsync();
+            return Entities.Select(predicate, include, orderBy, selector => selector, null, null, disableTracking, ignoreQueryFilters)
+                .FirstOrDefaultAsync();
         }
 
         public virtual Task<TResult?> GetAsync<TResult>(
@@ -46,7 +49,8 @@ namespace RepositoryPattern.Data.Infrastructure
             bool disableTracking = true,
             bool ignoreQueryFilters = false)
         {
-            return Entities.Select(predicate, include, orderBy, selector, null, null, disableTracking, ignoreQueryFilters).FirstOrDefaultAsync();
+            return Entities.Select(predicate, include, orderBy, selector, null, null, disableTracking, ignoreQueryFilters)
+                .FirstOrDefaultAsync();
         }
     }
 }

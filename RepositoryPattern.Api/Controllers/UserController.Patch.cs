@@ -12,7 +12,7 @@ namespace RepositoryPattern.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> PatchAsync(Guid id, [FromBody] JsonPatchDocument<UserCreate> model)
+        public async Task<IActionResult> PatchAsync(Guid id, [FromBody] JsonPatchDocument<UserUpdate> model)
         {
             try
             {

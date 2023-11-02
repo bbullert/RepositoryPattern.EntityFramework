@@ -10,9 +10,9 @@ namespace RepositoryPattern.Api.Controllers
         private readonly IUserService _userService;
 
         public UserController(
-            Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnvironment,
+            IWebHostEnvironment webHostEnvironment,
             IUserService userService)
-            : base(hostingEnvironment)
+            : base(webHostEnvironment)
         {
             _userService = userService;
         }

@@ -12,9 +12,7 @@ namespace RepositoryPattern.Core.Services
 
             _userUnitOfWork.ItemRepository.Remove(item);
 
-            var savedCount = await _userUnitOfWork.SaveAsync();
-            if (savedCount == 0)
-                throw new ApplicationException("Unable to save changes.");
+            await _userUnitOfWork.SaveAsync();
         }
     }
 }

@@ -6,15 +6,15 @@
         {
             Items = items;
 
-            if (count < 0) throw new ArgumentException($"Argument {nameof(count)} must be of equal or greater than 0.");
+            if (count < 0) throw new ArgumentException($"{nameof(count)} must be of equal or greater than 0.");
             Count = count;
 
-            if (size <= 0) throw new ArgumentException($"Argument {nameof(size)} must be greater than 0.");
+            if (size <= 0) throw new ArgumentException($"{nameof(size)} must be greater than 0.");
             Size = size;
             Pages = (int)Math.Ceiling(count / (double)size);
 
-            if (index <= 0) throw new IndexOutOfRangeException($"Argument {nameof(index)} must be greater than 0.");
-            if (index > Pages && Pages != 0) throw new IndexOutOfRangeException($"Argument {nameof(index)} must be of equal or less than {nameof(Pages)}");
+            if (index <= 0) throw new IndexOutOfRangeException($"{nameof(index)} must be greater than 0.");
+            if (index > Pages && Pages != 0) throw new IndexOutOfRangeException($"{nameof(index)} must be of equal or less than {nameof(Pages)}");
             Index = index;
         }
 

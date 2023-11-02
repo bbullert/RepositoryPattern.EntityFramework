@@ -16,8 +16,8 @@ namespace RepositoryPattern.Data.Infrastructure
             bool disableTracking = true,
             bool ignoreQueryFilters = false)
         {
-            var query = Entities.Select(predicate, include, orderBy, selector, null, null, disableTracking, ignoreQueryFilters);
-            return query.ToPagination(index ?? 1, size ?? 30);
+            return Entities.Select(predicate, include, orderBy, selector, null, null, disableTracking, ignoreQueryFilters)
+                .ToPagination(index ?? 1, size ?? 30);
         }
 
         public virtual IPagination<TEntity> GetPagination(
@@ -29,8 +29,8 @@ namespace RepositoryPattern.Data.Infrastructure
             bool disableTracking = true,
             bool ignoreQueryFilters = false)
         {
-            var query = Entities.Select(predicate, include, orderBy, selector => selector, null, null, disableTracking, ignoreQueryFilters);
-            return query.ToPagination(index ?? 1, size ?? 30);
+            return Entities.Select(predicate, include, orderBy, selector => selector, null, null, disableTracking, ignoreQueryFilters)
+                .ToPagination(index ?? 1, size ?? 30);
         }
 
         public virtual Task<IPagination<TResult>> GetPaginationAsync<TResult>(
@@ -43,8 +43,8 @@ namespace RepositoryPattern.Data.Infrastructure
             bool disableTracking = true,
             bool ignoreQueryFilters = false)
         {
-            var query = Entities.Select(predicate, include, orderBy, selector, null, null, disableTracking, ignoreQueryFilters);
-            return query.ToPaginationAsync(index ?? 1, size ?? 30);
+            return Entities.Select(predicate, include, orderBy, selector, null, null, disableTracking, ignoreQueryFilters)
+                .ToPaginationAsync(index ?? 1, size ?? 30);
         }
 
         public virtual Task<IPagination<TEntity>> GetPaginationAsync(
@@ -56,8 +56,8 @@ namespace RepositoryPattern.Data.Infrastructure
             bool disableTracking = true,
             bool ignoreQueryFilters = false)
         {
-            var query = Entities.Select(predicate, include, orderBy, selector => selector, null, null, disableTracking, ignoreQueryFilters);
-            return query.ToPaginationAsync(index ?? 1, size ?? 30);
+            return Entities.Select(predicate, include, orderBy, selector => selector, null, null, disableTracking, ignoreQueryFilters)
+                .ToPaginationAsync(index ?? 1, size ?? 30);
         }
     }
 }

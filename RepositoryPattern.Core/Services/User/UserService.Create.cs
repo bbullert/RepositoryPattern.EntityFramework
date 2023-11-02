@@ -7,14 +7,12 @@ namespace RepositoryPattern.Core.Services
         public async Task<Guid> CreateAsync(UserCreate user)
         {
             var id = await _userUnitOfWork.UserRepository.AddAsync(x => x.Id, user.ToEntity());
-            var savedCount = await _userUnitOfWork.SaveAsync();
-            if (savedCount == 0)
-                throw new ApplicationException("Unable to save changes.");
-
+            
+            await _userUnitOfWork.SaveAsync();
             return id;
         }
 
-        public async Task<IEnumerable<Guid>> CreateBulkAsync(IEnumerable<UserCreate> users)
+        public async Task<IEnumerable<Guid>> CreateBulkAsync(IEnumerable<UserBulkCreateItem> users)
         {
             _userUnitOfWork.BeginTransaction();
             try
@@ -22,12 +20,8 @@ namespace RepositoryPattern.Core.Services
                 var ids = await _userUnitOfWork.UserRepository.AddRangeAsync(
                     x => x.Id, users.Select(x => x.ToEntity()));
 
-                var savedCount = await _userUnitOfWork.SaveAsync();
-                if (savedCount != users.Count())
-                    throw new ApplicationException("Unable to save changes.");
-
+                await _userUnitOfWork.SaveAsync();
                 _userUnitOfWork.CommitTransaction();
-
                 return ids;
             }
             catch (Exception)

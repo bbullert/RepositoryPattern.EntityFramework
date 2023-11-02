@@ -5,19 +5,16 @@ namespace RepositoryPattern.Core.Services
 {
     public partial class GroupService
     {
-        public async Task PutAsync(Guid id, GroupCreate update)
+        public async Task PutAsync(Guid id, GroupUpdate update)
         {
             var group = await _userUnitOfWork.GroupRepository.GetAsync(x => x.Id == id);
             if (group == null)
                 throw new HttpRequestException("Group not found.", null, HttpStatusCode.NotFound);
 
-            var updated = update.ToEntity();
-            updated.Id = id;
-            _userUnitOfWork.GroupRepository.Update(updated);
+            update.UpdateEntity(group);
+            _userUnitOfWork.GroupRepository.Update(group);
 
-            var savedCount = await _userUnitOfWork.SaveAsync();
-            if (savedCount == 0)
-                throw new ApplicationException("Unable to save changes.");
+            await _userUnitOfWork.SaveAsync();
         }
     }
 }

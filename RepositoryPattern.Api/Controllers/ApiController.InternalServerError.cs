@@ -7,7 +7,7 @@ namespace RepositoryPattern.Api.Controllers
     {
         protected virtual ObjectResult InternalServerError(Exception ex)
         {
-            string message = _hostingEnvironment.IsDevelopment() ? 
+            string message = _webHostEnvironment.IsDevelopment() ? 
                 ex.Message : "An unexpected error has occurred";
             return StatusCode((int)HttpStatusCode.InternalServerError, message);
         }

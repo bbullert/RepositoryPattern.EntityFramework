@@ -14,7 +14,7 @@ namespace RepositoryPattern.Data.Configurations
 
             builder.Property(x => x.Name)
                 .IsRequired()
-                .HasColumnType("varchar")
+                .HasColumnType("nvarchar")
                 .HasMaxLength(30);
         }
     }

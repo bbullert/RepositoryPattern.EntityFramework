@@ -11,9 +11,8 @@ namespace RepositoryPattern.Core.Services
                 throw new HttpRequestException("User not found.", null, HttpStatusCode.NotFound);
 
             _userUnitOfWork.UserRepository.Remove(user);
-            var savedCount = await _userUnitOfWork.SaveAsync();
-            if (savedCount == 0)
-                throw new ApplicationException("Unable to save changes.");
+
+            await _userUnitOfWork.SaveAsync();
         }
 
         public async Task RemoveBulkAsync(IEnumerable<Guid> ids)
@@ -33,12 +32,9 @@ namespace RepositoryPattern.Core.Services
 
                     range.Add(user);
                 }
-
                 _userUnitOfWork.UserRepository.RemoveRange(range);
-                var savedCount = await _userUnitOfWork.SaveAsync();
-                if (savedCount != ids.Count())
-                    throw new ApplicationException("Unable to save changes.");
 
+                await _userUnitOfWork.SaveAsync();
                 _userUnitOfWork.CommitTransaction();
             }
             catch (Exception)

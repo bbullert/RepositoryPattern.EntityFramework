@@ -5,22 +5,19 @@ namespace RepositoryPattern.Core.Services
 {
     public partial class UserService
     {
-        public async Task PutAsync(Guid id, UserCreate update)
+        public async Task PutAsync(Guid id, UserUpdate update)
         {
             var user = await _userUnitOfWork.UserRepository.GetAsync(x => x.Id == id);
             if (user == null)
                 throw new HttpRequestException("User not found.", null, HttpStatusCode.NotFound);
 
-            var updated = update.ToEntity();
-            updated.Id = id;
-            _userUnitOfWork.UserRepository.Update(updated);
+            update.UpdateEntity(user);
+            _userUnitOfWork.UserRepository.Update(user);
 
-            var savedCount = await _userUnitOfWork.SaveAsync();
-            if (savedCount == 0)
-                throw new ApplicationException("Unable to save changes.");
+            await _userUnitOfWork.SaveAsync();
         }
 
-        public async Task PutBulkAsync(IEnumerable<UserUpdate> updates)
+        public async Task PutBulkAsync(IEnumerable<UserBulkUpdateItem> updates)
         {
             _userUnitOfWork.BeginTransaction();
             try
@@ -35,16 +32,12 @@ namespace RepositoryPattern.Core.Services
                     if (user == null)
                         throw new HttpRequestException($"User ({update.Id}) not found.", null, HttpStatusCode.NotFound);
 
-                    var updated = update.ToEntity();
-                    updated.Id = user.Id;
-                    range.Add(updated);
+                    update.UpdateEntity(user);
+                    range.Add(user);
                 }
-
                 _userUnitOfWork.UserRepository.UpdateRange(range);
-                var savedCount = await _userUnitOfWork.SaveAsync();
-                if (savedCount != updates.Count())
-                    throw new ApplicationException("Unable to save changes.");
 
+                await _userUnitOfWork.SaveAsync();
                 _userUnitOfWork.CommitTransaction();
             }
             catch (Exception)

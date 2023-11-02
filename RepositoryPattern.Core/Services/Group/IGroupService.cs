@@ -7,7 +7,7 @@ namespace RepositoryPattern.Core.Services
         Task<Guid> CreateAsync(GroupCreate create);
         Task<Group> GetAsync(Guid id);
         Task<IEnumerable<Group>> GetListAsync();
-        Task PutAsync(Guid id, GroupCreate update);
+        Task PutAsync(Guid id, GroupUpdate update);
         Task RemoveAsync(Guid id);
     }
 }

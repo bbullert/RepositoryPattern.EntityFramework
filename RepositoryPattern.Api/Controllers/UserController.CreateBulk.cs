@@ -9,7 +9,7 @@ namespace RepositoryPattern.Api.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> CreateBulkAsync([FromBody] UserCreateBulk model)
+        public async Task<IActionResult> CreateBulkAsync([FromBody] UserBulkCreate model)
         {
             try
             {

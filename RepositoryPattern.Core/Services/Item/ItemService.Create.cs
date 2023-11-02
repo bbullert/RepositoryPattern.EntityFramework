@@ -12,10 +12,8 @@ namespace RepositoryPattern.Core.Services
                 throw new HttpRequestException("User not found.", null, HttpStatusCode.NotFound);
 
             var id = await _userUnitOfWork.ItemRepository.AddAsync(x => x.Id, create.ToEntity());
-            var savedCount = await _userUnitOfWork.SaveAsync();
-            if (savedCount == 0)
-                throw new ApplicationException("Unable to save changes.");
 
+            await _userUnitOfWork.SaveAsync();
             return id;
         }
     }

@@ -7,14 +7,14 @@ namespace RepositoryPattern.Api.Controllers
     [Route("api")]
     public partial class SeedController : ApiController
     {
-        private readonly DataInitializeService _dataInitializeService;
+        private readonly ISeedService _seedService;
 
         public SeedController(
-            Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnvironment,
-            DataInitializeService dataInitializeService)
-            : base(hostingEnvironment)
+            IWebHostEnvironment webHostEnvironment,
+            ISeedService seedService)
+            : base(webHostEnvironment)
         {
-            _dataInitializeService = dataInitializeService;
+            _seedService = seedService;
         }
     }
 }

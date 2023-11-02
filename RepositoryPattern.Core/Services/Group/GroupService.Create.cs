@@ -7,10 +7,8 @@ namespace RepositoryPattern.Core.Services
         public async Task<Guid> CreateAsync(GroupCreate create)
         {
             var id = await _userUnitOfWork.GroupRepository.AddAsync(x => x.Id, create.ToEntity());
-            var savedCount = await _userUnitOfWork.SaveAsync();
-            if (savedCount == 0)
-                throw new ApplicationException("Unable to save changes.");
-
+            
+            await _userUnitOfWork.SaveAsync();
             return id;
         }
     }

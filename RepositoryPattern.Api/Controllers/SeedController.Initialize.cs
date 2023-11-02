@@ -11,7 +11,7 @@ namespace RepositoryPattern.Api.Controllers
         {
             try
             {
-                await _dataInitializeService.InitializeAsync();
+                await _seedService.InitializeAsync();
                 return NoContent();
             }
             catch (HttpRequestException ex)

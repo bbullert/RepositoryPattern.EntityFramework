@@ -10,7 +10,7 @@ namespace RepositoryPattern.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> PutBulkAsync([FromBody] UserUpdateBulk model)
+        public async Task<IActionResult> PutBulkAsync([FromBody] UserBulkUpdate model)
         {
             try
             {
