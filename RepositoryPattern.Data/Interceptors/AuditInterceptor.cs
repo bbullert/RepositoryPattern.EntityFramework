@@ -10,6 +10,7 @@ namespace RepositoryPattern.Data.Interceptors
 {
     public class AuditInterceptor<TAudit, TAuditKey, TEntity, TEntityKey> : SaveChangesInterceptor
         where TAudit : class, IGenericAudit<TAuditKey, TEntityKey>
+        where TEntity : class
         where TAuditKey : IEquatable<TAuditKey>
         where TEntity : class
         where TEntityKey : IEquatable<TEntityKey>
@@ -46,6 +47,14 @@ namespace RepositoryPattern.Data.Interceptors
             var created = context.ChangeTracker.Entries<ICreatedAt>();
             foreach (EntityEntry<ICreatedAt> entry in created)
             {
+                //var auditEntry = new AuditEntry();
+                //auditEntry.TableName = entry.Metadata.GetTableName();
+                //auditEntry.ModifyDateTime = DateTime.UtcNow;
+                var audit = (TAudit)Activator.CreateInstance(typeof(TAudit));
+                audit.TableName = entry.Metadata.GetTableName();
+                audit.ModifyDateTime = DateTime.UtcNow;
+                var values = new Dictionary<string, object>();
+
                 if (entry.State == EntityState.Added)
                 {
                     entry.Entity.CreatedAt = DateTime.UtcNow;
@@ -81,20 +90,21 @@ namespace RepositoryPattern.Data.Interceptors
                 auditEntry.TableName = entry.Metadata.GetTableName();
                 auditEntry.ModifiedAt = DateTime.UtcNow;
 
-                foreach (var property in entry.Properties)
-                {
-                    if (property.IsTemporary) continue;
-
-                    if (property.Metadata.IsPrimaryKey())
+                    foreach (var property in entry.Properties)
                     {
+                        if (property.IsTemporary) continue;
+
+                        if (property.Metadata.IsPrimaryKey())
+                        {
                         auditEntry.EntityId = (TEntityKey)property.CurrentValue;
+                        }
+
+                        string propertyName = property.Metadata.Name;
+                    auditEntry.Values[propertyName] = property.CurrentValue;
                     }
 
-                    string propertyName = property.Metadata.Name;
-                    auditEntry.Values[propertyName] = property.CurrentValue;
-                }
-
                 audits.Add(auditEntry.ToAudit());
+                }
             }
 
             if (audits.Count > 0)

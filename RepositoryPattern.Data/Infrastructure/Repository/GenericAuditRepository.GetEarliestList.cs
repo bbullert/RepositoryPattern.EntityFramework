@@ -13,6 +13,7 @@ namespace RepositoryPattern.Data.Infrastructure.Repository
                 predicate =>
                 predicate.EntityId.Equals(entityId) &&
                 predicate.TableName == TableName,
+                order => order.OrderBy(x => x.ModifyDateTime),
                 null,
                 order => order.OrderBy(x => x.ModifiedAt),
                 selector => selector,
@@ -28,6 +29,7 @@ namespace RepositoryPattern.Data.Infrastructure.Repository
                 predicate =>
                 predicate.EntityId.Equals(entityId) &&
                 predicate.TableName == TableName,
+                order => order.OrderBy(x => x.ModifyDateTime),
                 null,
                 order => order.OrderBy(x => x.ModifiedAt),
                 selector => selector,

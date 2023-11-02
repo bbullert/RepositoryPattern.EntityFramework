@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using RepositoryPattern.Data.Entities;
+using RepositoryPattern.Data.UoW;
 
 namespace RepositoryPattern.Seed.Generators
 {
@@ -18,6 +19,14 @@ namespace RepositoryPattern.Seed.Generators
                     itemGenerator.Generate(random.Next(1, 3)).ToList()
                 );
             return generator;
+        }
+
+        public IEnumerable<Guid> Add(int size)
+        {
+            var generator = Generate();
+            var users = generator.Generate(size);
+
+            return new List<Guid>();
         }
     }
 }

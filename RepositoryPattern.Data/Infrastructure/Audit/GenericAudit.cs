@@ -10,6 +10,7 @@ namespace RepositoryPattern.Data.Infrastructure
         public string TableName { get; set; }
         public DateTime ModifiedAt { get; set; }
         public TEntityKey EntityId { get; set; }
+        public DateTime ModifyDateTime { get; set; }
         public string Values { get; set; }
 
         public TEntity ToEntity<TEntity>()

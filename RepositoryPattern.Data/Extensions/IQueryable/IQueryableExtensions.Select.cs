@@ -9,6 +9,7 @@ namespace RepositoryPattern.Data.Extensions
         public static IQueryable<TResult> Select<TEntity, TResult>(
             this IQueryable<TEntity> query,
             Expression<Func<TEntity, bool>> predicate = default,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = default,
             Expression<Func<TEntity, TResult>> selector = default,
@@ -23,6 +24,8 @@ namespace RepositoryPattern.Data.Extensions
             if (include != null) query = include(query);
 
             if (orderBy != null) query = orderBy(query);
+
+            if (include != null) query = include(query);
 
             if (selector == null) selector = entity => (TResult)(object)entity;
 
