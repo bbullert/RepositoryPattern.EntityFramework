@@ -11,17 +11,27 @@ namespace RepositoryPattern.Data.Configurations
             builder.ToTable("Audit", "audit");
 
             builder.HasKey(x => x.Id);
+            //builder.HasNoKey();
 
             builder.Property(x => x.TableName)
                 .IsRequired()
                 .HasColumnType("varchar")
                 .HasMaxLength(50);
 
+            //builder.Property(x => x.EntityId)
+            //    .IsRequired()
+            //    .HasColumnType("varchar")
+            //    .HasMaxLength(36);
             builder.Property(x => x.EntityId)
                 .IsRequired();
 
             builder.Property(x => x.ModifiedAt)
                 .IsRequired();
+
+            //builder.Property(x => x.Property)
+            //    .IsRequired()
+            //    .HasColumnType("varchar")
+            //    .HasMaxLength(100);
 
             builder.Property(x => x.Values)
                 .IsRequired()

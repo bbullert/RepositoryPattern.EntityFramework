@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using RepositoryPattern.Data.Entities;
+using RepositoryPattern.Data.UoW;
 
 namespace RepositoryPattern.Seed.Generators
 {

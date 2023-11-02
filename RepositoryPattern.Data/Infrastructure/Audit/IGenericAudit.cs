@@ -8,6 +8,7 @@
         string TableName { get; set; }
         DateTime ModifiedAt { get; set; }
         TEntityKey EntityId { get; set; }
+        DateTime ModifyDateTime { get; set; }
         string Values { get; set; }
 
         TEntity ToEntity<TEntity>();

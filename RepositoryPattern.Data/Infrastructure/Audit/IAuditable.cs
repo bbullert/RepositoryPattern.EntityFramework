@@ -2,5 +2,6 @@
 {
     public interface IAuditable
     {
+        //public DateTime CreateDate { get; set; }
     }
 }

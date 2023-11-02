@@ -2,16 +2,13 @@
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using RepositoryPattern.Data.Infrastructure;
-using System.Threading;
-using System.Threading.Channels;
-using System.Xml;
 
 namespace RepositoryPattern.Data.Interceptors
 {
     public class AuditInterceptor<TAudit, TAuditKey, TEntity, TEntityKey> : SaveChangesInterceptor
         where TAudit : class, IGenericAudit<TAuditKey, TEntityKey>
-        where TAuditKey : IEquatable<TAuditKey>
         where TEntity : class
+        where TAuditKey : IEquatable<TAuditKey>
         where TEntityKey : IEquatable<TEntityKey>
     {
         public override InterceptionResult<int> SavingChanges
@@ -87,7 +84,7 @@ namespace RepositoryPattern.Data.Interceptors
 
                     if (property.Metadata.IsPrimaryKey())
                     {
-                        auditEntry.EntityId = (TEntityKey)property.CurrentValue;
+                    auditEntry.EntityId = (TEntityKey)property.CurrentValue;
                     }
 
                     string propertyName = property.Metadata.Name;
@@ -97,7 +94,7 @@ namespace RepositoryPattern.Data.Interceptors
                 audits.Add(auditEntry.ToAudit());
             }
 
-            if (audits.Count > 0)
+            if (audits.Count() > 0)
             {
                 context.Set<TAudit>().AddRange(audits);
             }

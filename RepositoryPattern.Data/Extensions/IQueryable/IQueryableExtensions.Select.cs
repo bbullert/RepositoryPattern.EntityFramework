@@ -24,6 +24,8 @@ namespace RepositoryPattern.Data.Extensions
 
             if (orderBy != null) query = orderBy(query);
 
+            if (include != null) query = include(query);
+
             if (selector == null) selector = entity => (TResult)(object)entity;
 
             if (skip != null) query = query.Skip(skip.Value);
