@@ -78,18 +78,18 @@ namespace RepositoryPattern.Data.Interceptors
                 auditEntry.TableName = entry.Metadata.GetTableName();
                 auditEntry.ModifiedAt = DateTime.UtcNow;
 
-                foreach (var property in entry.Properties)
-                {
-                    if (property.IsTemporary) continue;
+                    foreach (var property in entry.Properties)
+                    {
+                        if (property.IsTemporary) continue;
 
                     if (property.Metadata.IsPrimaryKey())
                     {
                     auditEntry.EntityId = (TEntityKey)property.CurrentValue;
                     }
 
-                    string propertyName = property.Metadata.Name;
+                        string propertyName = property.Metadata.Name;
                     auditEntry.Values[propertyName] = property.CurrentValue;
-                }
+                    }
 
                 audits.Add(auditEntry.ToAudit());
             }
