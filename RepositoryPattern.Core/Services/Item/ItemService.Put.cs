@@ -5,7 +5,7 @@ namespace RepositoryPattern.Core.Services
 {
     public partial class ItemService
     {
-        public async Task PutAsync(Guid id, ItemCreate update)
+        public async Task PutAsync(Guid id, ItemUpdate update)
         {
             var item = await _userUnitOfWork.ItemRepository.GetAsync(x => x.Id == id);
             if (item == null)
@@ -15,13 +15,10 @@ namespace RepositoryPattern.Core.Services
             if (user == null)
                 throw new HttpRequestException("User not found.", null, HttpStatusCode.NotFound);
 
-            var updated = update.ToEntity();
-            updated.Id = id;
-            _userUnitOfWork.ItemRepository.Update(updated);
+            update.UpdateEntity(item);
+            _userUnitOfWork.ItemRepository.Update(item);
 
-            var savedCount = await _userUnitOfWork.SaveAsync();
-            if (savedCount == 0)
-                throw new ApplicationException("Unable to save changes.");
+            await _userUnitOfWork.SaveAsync();
         }
     }
 }

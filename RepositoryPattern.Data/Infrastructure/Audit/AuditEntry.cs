@@ -11,11 +11,11 @@ namespace RepositoryPattern.Data.Infrastructure
         public string TableName { get; set; }
         public TEntityKey EntityId { get; set; }
         public DateTime ModifiedAt { get; set; }
-        public Dictionary<string, object> Values { get; set; }
+        public Dictionary<string, object> Changes { get; set; }
 
         public AuditEntry()
         {
-            Values = new Dictionary<string, object>();
+            Changes = new Dictionary<string, object>();
         }
 
         public TAudit ToAudit()
@@ -24,7 +24,7 @@ namespace RepositoryPattern.Data.Infrastructure
             audit.TableName = TableName;
             audit.EntityId = EntityId;
             audit.ModifiedAt = ModifiedAt;
-            audit.Values = JsonSerializer.Serialize(Values);
+            audit.Changes = JsonSerializer.Serialize(Changes);
             return audit;
         }
     }

@@ -5,30 +5,28 @@ namespace RepositoryPattern.Data.Infrastructure.Repository
 {
     public partial class GenericAuditRepository<TAudit, TAuditKey, TEntityKey>
     {
-        public virtual TAudit? GetLatest(
-            TEntityKey entityId,
-            int? take = default)
+        public virtual TAudit? GetLatest(TEntityKey entityId)
         {
             return Audits.Select(
                 predicate =>
-                predicate.EntityId.Equals(entityId) &&
-                predicate.TableName == TableName,
+                    predicate.EntityId.Equals(entityId) &&
+                    predicate.TableName == TableName,
                 null,
                 order => order.OrderByDescending(x => x.ModifiedAt),
-                selector => selector).FirstOrDefault();
+                selector => selector
+            ).FirstOrDefault();
         }
 
-        public virtual async Task<TAudit?> GetLatestAsync(
-            TEntityKey entityId,
-            int? take = default)
+        public virtual Task<TAudit?> GetLatestAsync(TEntityKey entityId)
         {
-            return await Audits.Select(
+            return Audits.Select(
                 predicate =>
-                predicate.EntityId.Equals(entityId) &&
-                predicate.TableName == TableName,
+                    predicate.EntityId.Equals(entityId) &&
+                    predicate.TableName == TableName,
                 null,
                 order => order.OrderByDescending(x => x.ModifiedAt),
-                selector => selector).FirstOrDefaultAsync();
+                selector => selector
+            ).FirstOrDefaultAsync();
         }
     }
 }

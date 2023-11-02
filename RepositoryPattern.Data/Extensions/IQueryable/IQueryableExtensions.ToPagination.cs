@@ -7,8 +7,8 @@ namespace RepositoryPattern.Data.Extensions
     {
         public static IPagination<T> ToPagination<T>(this IQueryable<T> source, int index, int size)
         {
-            if (index <= 0) throw new ArgumentException($"Argument {nameof(index)} must be greater than 0.");
-            if (size <= 0) throw new ArgumentException($"Argument {nameof(size)} must be greater than 0.");
+            if (index <= 0) throw new ArgumentException($"{nameof(index)} must be greater than 0.");
+            if (size <= 0) throw new ArgumentException($"{nameof(size)} must be greater than 0.");
 
             int skip = (index - 1) * size;
             var items = source.Skip(skip).Take(size).ToList();
@@ -18,8 +18,8 @@ namespace RepositoryPattern.Data.Extensions
 
         public static async Task<IPagination<T>> ToPaginationAsync<T>(this IQueryable<T> source, int index, int size)
         {
-            if (index <= 0) throw new ArgumentException($"Argument {nameof(index)} must be greater than 0.");
-            if (size <= 0) throw new ArgumentException($"Argument {nameof(size)} must be greater than 0.");
+            if (index <= 0) throw new ArgumentException($"{nameof(index)} must be greater than 0.");
+            if (size <= 0) throw new ArgumentException($"{nameof(size)} must be greater than 0.");
 
             int skip = (index - 1) * size;
             var items = await source.Skip(skip).Take(size).ToListAsync();

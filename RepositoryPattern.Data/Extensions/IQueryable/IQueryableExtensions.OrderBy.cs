@@ -41,7 +41,7 @@ namespace RepositoryPattern.Data.Extensions
             foreach (var sortOrderItem in sortOrder)
             {
                 if (string.IsNullOrEmpty(sortOrderItem))
-                    throw new ArgumentNullException(nameof(sortOrderItem));
+                    throw new ArgumentException($"{nameof(sortOrderItem)} was null or empty.");
 
                 var param = sortOrderItem.Trim().Split(' ').ToList();
                 if (param.Count > 2)

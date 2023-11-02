@@ -13,6 +13,7 @@ namespace RepositoryPattern.Core.Dto
         public string LastName { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
 
         public Data.Entities.User ToEntity()
@@ -22,16 +23,6 @@ namespace RepositoryPattern.Core.Dto
                 FirstName = FirstName,
                 LastName = LastName,
                 BirthDate = BirthDate,
-            };
-        }
-
-        public static UserCreate FromEntity(Data.Entities.User entity)
-        {
-            return new UserCreate()
-            {
-                FirstName = entity.FirstName,
-                LastName = entity.LastName,
-                BirthDate = entity.BirthDate
             };
         }
     }

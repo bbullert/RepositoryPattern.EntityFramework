@@ -10,9 +10,9 @@ namespace RepositoryPattern.Api.Controllers
         private readonly IGroupUserService _groupUserService;
 
         public GroupUserController(
-            Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnvironment,
+            IWebHostEnvironment webHostEnvironment,
             IGroupUserService groupUserService)
-            : base(hostingEnvironment)
+            : base(webHostEnvironment)
         {
             _groupUserService = groupUserService;
         }

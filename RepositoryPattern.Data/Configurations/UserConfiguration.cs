@@ -15,45 +15,18 @@ namespace RepositoryPattern.Data.Configurations
 
             builder.Property(x => x.FirstName)
                 .IsRequired()
-                .HasColumnType("varchar")
+                .HasColumnType("nvarchar")
                 .HasMaxLength(30);
 
             builder.Property(x => x.LastName)
                 .IsRequired()
-                .HasColumnType("varchar")
+                .HasColumnType("nvarchar")
                 .HasMaxLength(30);
 
             builder.Property(x => x.BirthDate)
                 .IsRequired()
                 .HasColumnType("date");
 
-            //builder.HasMany(x => x.Groups)
-            //    .WithMany(x => x.Users)
-            //    .UsingEntity(
-            //        "GroupUser",
-            //        l => l.HasOne(typeof(Group)).WithMany().HasForeignKey("GroupId").HasPrincipalKey(nameof(Group.Id)),
-            //        r => r.HasOne(typeof(User)).WithMany().HasForeignKey("UserId").HasPrincipalKey(nameof(User.Id)),
-            //        j => j.HasKey("PostsId", "TagsId"));
-            //builder.HasMany(x => x.Groups)
-            //    .WithMany(x => x.Users)
-            //    .UsingEntity(
-            //        "GroupUser",
-            //        l => l.HasOne(typeof(Group)).WithMany().HasForeignKey("GroupId").HasPrincipalKey(nameof(Group.Id)),
-            //        r => r.HasOne(typeof(User)).WithMany().HasForeignKey("UserId").HasPrincipalKey(nameof(User.Id)),
-            //        j => j.HasNoKey());
-            //builder.HasMany(x => x.Groups)
-            //    .WithMany(x => x.Users)
-            //    .UsingEntity(
-            //        "GroupUser",
-            //        l => l.HasOne(typeof(Group)).WithMany().HasForeignKey("GroupId").HasPrincipalKey(nameof(Group.Id)),
-            //        r => r.HasOne(typeof(User)).WithMany().HasForeignKey("UserId").HasPrincipalKey(nameof(User.Id)));
-            //builder.HasMany(x => x.Groups)
-            //    .WithMany(x => x.Users)
-            //    .UsingEntity(
-            //        "GroupUser",
-            //        l => l.HasOne(typeof(Group)).WithMany().HasForeignKey("GroupId").HasPrincipalKey(nameof(Group.Id)),
-            //        r => r.HasOne(typeof(User)).WithMany().HasForeignKey("UserId").HasPrincipalKey(nameof(User.Id)));
-            
             builder.HasMany(x => x.Groups)
                 .WithMany(x => x.Users)
                 .UsingEntity("GroupUser");

@@ -46,7 +46,7 @@ namespace RepositoryPattern.Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("varchar");
+                        .HasColumnType("nvarchar");
 
                     b.HasKey("Id");
 
@@ -62,7 +62,7 @@ namespace RepositoryPattern.Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("varchar");
+                        .HasColumnType("nvarchar");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -89,7 +89,7 @@ namespace RepositoryPattern.Data.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("varchar");
+                        .HasColumnType("nvarchar");
 
                     b.Property<DateTime?>("LastModifiedAt")
                         .HasColumnType("datetime2");
@@ -97,7 +97,7 @@ namespace RepositoryPattern.Data.Migrations
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("varchar");
+                        .HasColumnType("nvarchar");
 
                     b.HasKey("Id");
 
@@ -110,6 +110,10 @@ namespace RepositoryPattern.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Changes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("EntityId")
                         .HasColumnType("uniqueidentifier");
 
@@ -119,11 +123,7 @@ namespace RepositoryPattern.Data.Migrations
                     b.Property<string>("TableName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("varchar");
-
-                    b.Property<string>("Values")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar");
 
                     b.HasKey("Id");
 

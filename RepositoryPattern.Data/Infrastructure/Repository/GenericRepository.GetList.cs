@@ -16,7 +16,8 @@ namespace RepositoryPattern.Data.Infrastructure
             bool disableTracking = true,
             bool ignoreQueryFilters = false)
         {
-            return Entities.Select(predicate, include, orderBy, selector => selector, skip, take, disableTracking, ignoreQueryFilters).ToList();
+            return Entities.Select(predicate, include, orderBy, selector => selector, skip, take, disableTracking, ignoreQueryFilters)
+                .ToList();
         }
 
         public virtual IEnumerable<TResult> GetList<TResult>(
@@ -29,7 +30,8 @@ namespace RepositoryPattern.Data.Infrastructure
             bool disableTracking = true,
             bool ignoreQueryFilters = false)
         {
-            return Entities.Select(predicate, include, orderBy, selector, skip, take, disableTracking, ignoreQueryFilters).ToList();
+            return Entities.Select(predicate, include, orderBy, selector, skip, take, disableTracking, ignoreQueryFilters)
+                .ToList();
         }
 
         public virtual async Task<IEnumerable<TEntity>> GetListAsync(
@@ -41,7 +43,8 @@ namespace RepositoryPattern.Data.Infrastructure
             bool disableTracking = true,
             bool ignoreQueryFilters = false)
         {
-            return await Entities.Select(predicate, include, orderBy, selector => selector, skip, take, disableTracking, ignoreQueryFilters).ToListAsync();
+            return await Entities.Select(predicate, include, orderBy, selector => selector, skip, take, disableTracking, ignoreQueryFilters)
+                .ToListAsync();
         }
 
         public virtual async Task<IEnumerable<TResult>> GetListAsync<TResult>(
@@ -54,7 +57,8 @@ namespace RepositoryPattern.Data.Infrastructure
             bool disableTracking = true,
             bool ignoreQueryFilters = false)
         {
-            return await Entities.Select(predicate, include, orderBy, selector, skip, take, disableTracking, ignoreQueryFilters).ToListAsync();
+            return await Entities.Select(predicate, include, orderBy, selector, skip, take, disableTracking, ignoreQueryFilters)
+                .ToListAsync();
         }
     }
 }

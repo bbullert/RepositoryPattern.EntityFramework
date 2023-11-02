@@ -10,7 +10,7 @@ namespace RepositoryPattern.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> PutAsync(Guid id, [FromBody] ItemCreate model)
+        public async Task<IActionResult> PutAsync(Guid id, [FromBody] ItemUpdate model)
         {
             try
             {

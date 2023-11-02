@@ -9,7 +9,7 @@ namespace RepositoryPattern.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> RemoveBulkAsync([FromBody] UserRemoveBulk model)
+        public async Task<IActionResult> RemoveBulkAsync([FromBody] UserBulkRemove model)
         {
             try
             {

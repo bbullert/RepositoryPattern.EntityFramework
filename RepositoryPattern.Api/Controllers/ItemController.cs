@@ -10,9 +10,9 @@ namespace RepositoryPattern.Api.Controllers
         private readonly IItemService _itemService;
 
         public ItemController(
-            Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnvironment,
+            IWebHostEnvironment webHostEnvironment,
             IItemService itemService)
-            : base(hostingEnvironment)
+            : base(webHostEnvironment)
         {
             _itemService = itemService;
         }
