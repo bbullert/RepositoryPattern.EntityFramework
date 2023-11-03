@@ -10,11 +10,6 @@ namespace RepositoryPattern.Core.Services
     {
         public async Task<User> GetAsync(Guid id)
         {
-            var a = await _userUnitOfWork.UserAuditRepository.GetFirstAsync(id);
-            var b = a.ToEntity<User>();
-            var c = await _userUnitOfWork.UserAuditRepository.GetPaginationAsync(id, new AuditCriteria());
-            var d = c.Items.Select(x => x.ToEntity<User>());
-
             var user = await _userUnitOfWork.UserRepository.GetAsync(
                 x => x.Id == id, 
                 include => include
