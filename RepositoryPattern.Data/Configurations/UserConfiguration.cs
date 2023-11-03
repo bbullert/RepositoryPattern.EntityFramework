@@ -1,5 +1,4 @@
-﻿using Azure;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RepositoryPattern.Data.Entities;
 
