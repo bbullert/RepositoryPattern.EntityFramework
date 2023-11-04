@@ -5,7 +5,7 @@ namespace RepositoryPattern.Seed
 {
     public static class Bootstrapper
     {
-        public static void AddGenerators(this IServiceCollection services)
+        public static void AddSeedServices(this IServiceCollection services)
         {
             services.AddScoped<IUserSeedService, UserSeedService>();
             services.AddScoped<IGroupSeedService, GroupSeedService>();

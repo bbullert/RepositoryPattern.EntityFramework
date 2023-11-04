@@ -33,7 +33,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddRepositories();
 builder.Services.AddUnitsOfWork();
 builder.Services.AddServices();
-builder.Services.AddGenerators();
+builder.Services.AddSeedServices();
 
 builder.Services.AddDbContext<DataContext>(options =>
 {
