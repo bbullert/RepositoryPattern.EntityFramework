@@ -6,7 +6,7 @@ namespace RepositoryPattern.Data.Repositories
 {
     public class GroupRepository : GenericRepository<Group>, IGroupRepository
     {
-        public GroupRepository(DataContext context) : base(context)
+        public GroupRepository(ApiContext context) : base(context)
         {
         }
     }

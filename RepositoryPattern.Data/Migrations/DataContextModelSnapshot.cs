@@ -10,7 +10,7 @@ using RepositoryPattern.Data.Contexts;
 
 namespace RepositoryPattern.Data.Migrations
 {
-    [DbContext(typeof(DataContext))]
+    [DbContext(typeof(ApiContext))]
     partial class DataContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

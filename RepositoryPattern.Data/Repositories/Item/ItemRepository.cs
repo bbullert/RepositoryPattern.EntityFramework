@@ -6,7 +6,7 @@ namespace RepositoryPattern.Data.Repositories
 {
     public class ItemRepository : GenericRepository<Item>, IItemRepository
     {
-        public ItemRepository(DataContext context) : base(context)
+        public ItemRepository(ApiContext context) : base(context)
         {
         }
     }

@@ -6,7 +6,7 @@ namespace RepositoryPattern.Data.Repositories
 {
     public class UserAuditRepository : GenericAuditRepository<Audit, Guid, Guid>, IUserAuditRepository
     {
-        public UserAuditRepository(DataContext context) : base(context, "User")
+        public UserAuditRepository(ApiContext context) : base(context, "User")
         {
         }
     }

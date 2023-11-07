@@ -11,9 +11,9 @@ using RepositoryPattern.Data.Contexts;
 
 namespace RepositoryPattern.Data.Migrations
 {
-    [DbContext(typeof(DataContext))]
-    [Migration("20231102194206_InitialCreate")]
-    partial class InitialCreate
+    [DbContext(typeof(ApiContext))]
+    [Migration("20231107135427_a")]
+    partial class a
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

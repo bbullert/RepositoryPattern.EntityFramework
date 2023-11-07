@@ -1,4 +1,5 @@
 ﻿using RepositoryPattern.Core.Dto;
+using RepositoryPattern.Data.Entities;
 using System.Net;
 
 namespace RepositoryPattern.Core.Services
@@ -11,8 +12,8 @@ namespace RepositoryPattern.Core.Services
             if (item == null)
                 throw new HttpRequestException("Item not found.", null, HttpStatusCode.NotFound);
 
-            var user = await _userUnitOfWork.UserRepository.GetAsync(x => x.Id == update.UserId);
-            if (user == null)
+            var userExists = await _userUnitOfWork.UserRepository.ExistsAsync(x => x.Id == update.UserId);
+            if (!userExists)
                 throw new HttpRequestException("User not found.", null, HttpStatusCode.NotFound);
 
             update.UpdateEntity(item);

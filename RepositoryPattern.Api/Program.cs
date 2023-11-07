@@ -11,6 +11,22 @@ using RepositoryPattern.Seed;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddRepositories();
+builder.Services.AddUnitsOfWork();
+builder.Services.AddServices();
+builder.Services.AddSeedServices();
+
+builder.Services.AddDbContext<ApiContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Default"))
+        .AddInterceptors(new AuditInterceptor<Audit, Guid, IAuditable, Guid>());
+});
+
 builder.Services.AddControllers()
     .ConfigureApiBehaviorOptions(options =>
         options.InvalidModelStateResponseFactory = context =>
@@ -26,19 +42,9 @@ builder.Services.AddControllers()
     )
     .AddNewtonsoftJson();
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-builder.Services.AddRepositories();
-builder.Services.AddUnitsOfWork();
-builder.Services.AddServices();
-builder.Services.AddSeedServices();
-
-builder.Services.AddDbContext<DataContext>(options =>
+builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Default"))
-        .AddInterceptors(new AuditInterceptor<Audit, Guid, IAuditable, Guid>());
+    options.SuppressModelStateInvalidFilter = true;
 });
 
 var app = builder.Build();
@@ -49,12 +55,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    app.UseCors(builder => builder
-        .WithOrigins("http://localhost:5000", "https://localhost:5001")
-        .WithOrigins("http://localhost:8080", "https://localhost:8080")
+    app.UseCors(cors => cors
+        .WithOrigins(
+            builder.Configuration["Kestrel:Endpoints:Https:Url"],
+            builder.Configuration["Kestrel:Endpoints:Http:Url"]
+        )
         .AllowAnyMethod()
         .AllowAnyHeader()
-        .AllowCredentials());
+    .AllowCredentials());
+
+    if (args.Contains("/seed"))
+        await app.EnsureDataAsync();
 }
 
 app.UseHttpsRedirection();

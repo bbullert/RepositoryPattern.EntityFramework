@@ -13,6 +13,9 @@ namespace RepositoryPattern.Api.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                    return UnprocessableEntity(ModelState);
+
                 var result = await _userService.CreateBulkAsync(model.Users);
                 return Created(result);
             }

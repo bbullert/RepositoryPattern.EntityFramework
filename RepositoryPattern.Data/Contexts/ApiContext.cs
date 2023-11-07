@@ -3,9 +3,9 @@ using RepositoryPattern.Data.Configurations;
 
 namespace RepositoryPattern.Data.Contexts
 {
-    public class DataContext : DbContext
+    public class ApiContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        public ApiContext(DbContextOptions<ApiContext> options) : base(options)
         {
         }
 

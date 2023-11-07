@@ -7,7 +7,7 @@ namespace RepositoryPattern.Data.Repositories
 {
     public class UserRepository : GenericRepository<User>, IUserRepository
     {
-        public UserRepository(DataContext context) : base(context)
+        public UserRepository(ApiContext context) : base(context)
         {
         }
     }

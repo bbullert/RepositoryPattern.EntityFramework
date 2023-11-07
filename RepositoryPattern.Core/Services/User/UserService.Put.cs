@@ -19,9 +19,10 @@ namespace RepositoryPattern.Core.Services
 
         public async Task PutBulkAsync(IEnumerable<UserBulkUpdateItem> updates)
         {
-            _userUnitOfWork.BeginTransaction();
             try
             {
+                _userUnitOfWork.BeginTransaction();
+
                 var users = await _userUnitOfWork.UserRepository.GetListAsync(
                     predicate => updates.Select(x => x.Id).Contains(predicate.Id));
 

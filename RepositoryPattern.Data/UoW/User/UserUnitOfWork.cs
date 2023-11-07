@@ -4,14 +4,14 @@ using RepositoryPattern.Data.Repositories;
 
 namespace RepositoryPattern.Data.UoW
 {
-    public class UserUnitOfWork : GenericUnitOfWork<DataContext>, IUserUnitOfWork
+    public class UserUnitOfWork : GenericUnitOfWork<ApiContext>, IUserUnitOfWork
     {
         private IUserRepository _userRepository;
         private IGroupRepository _groupRepository;
         private IItemRepository _itemRepository;
         private IUserAuditRepository _userAuditRepository;
 
-        public UserUnitOfWork(DataContext context) : base(context)
+        public UserUnitOfWork(ApiContext context) : base(context)
         {
         }
 

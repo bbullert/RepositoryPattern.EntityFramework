@@ -8,8 +8,8 @@ namespace RepositoryPattern.Core.Services
     {
         public async Task<IEnumerable<Group>> GetUserGroupsAsync(Guid userId)
         {
-            var user = await _userUnitOfWork.UserRepository.GetAsync(x => x.Id == userId);
-            if (user == null)
+            bool userExists = await _userUnitOfWork.UserRepository.ExistsAsync(x => x.Id == userId);
+            if (!userExists)
                 throw new HttpRequestException("User not found.", null, HttpStatusCode.NotFound);
 
             var groups = await _userUnitOfWork.GroupRepository.GetListAsync(

@@ -1,4 +1,5 @@
-﻿using RepositoryPattern.Data.UoW;
+﻿using RepositoryPattern.Data.Entities;
+using RepositoryPattern.Data.UoW;
 
 namespace RepositoryPattern.Seed.Services
 {
@@ -21,22 +22,24 @@ namespace RepositoryPattern.Seed.Services
             _itemSeedService = itemSeedService;
         }
 
-        public async Task InitializeAsync()
+        public async Task EnsureDataAsync()
         {
-            var itemSeedService = _itemSeedService.SeedGenerator();
-            var userSeedService = _userSeedService.SeedGenerator(itemSeedService);
-            var groupSeedService = _groupSeedService.SeedGenerator(userSeedService);
+            try
+            {
+                _userUnitOfWork.BeginTransaction();
 
-            var groups = groupSeedService.Generate(100);
-            await _userUnitOfWork.GroupRepository.AddRangeAsync(groups);
+                var groups = await _groupSeedService.EnsureGroupsAsync();
+                var users = await _userSeedService.EnsureUsersAsync(groups);
+                var items = await _itemSeedService.EnsureItemsAsync(users);
 
-            var users = groups.SelectMany(x => x.Users);
-            await _userUnitOfWork.UserRepository.AddRangeAsync(users);
-
-            var items = users.SelectMany(x => x.Items);
-            await _userUnitOfWork.ItemRepository.AddRangeAsync(items);
-
-            await _userUnitOfWork.SaveAsync();
+                _userUnitOfWork.CommitTransaction();
+            }
+            catch (Exception)
+            {
+                _userUnitOfWork.RollbackTransaction();
+                _userUnitOfWork.Dispose();
+                throw;
+            }
         }
     }
 }

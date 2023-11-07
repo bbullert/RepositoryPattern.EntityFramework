@@ -17,9 +17,10 @@ namespace RepositoryPattern.Core.Services
 
         public async Task RemoveBulkAsync(IEnumerable<Guid> ids)
         {
-            _userUnitOfWork.BeginTransaction();
             try
             {
+                _userUnitOfWork.BeginTransaction();
+
                 var users = await _userUnitOfWork.UserRepository.GetListAsync(
                     predicate => ids.Contains(predicate.Id));
 

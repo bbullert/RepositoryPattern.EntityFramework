@@ -14,6 +14,9 @@ namespace RepositoryPattern.Api.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                    return UnprocessableEntity(ModelState);
+
                 var result = await _itemService.CreateAsync(model);
                 return Created(result);
             }

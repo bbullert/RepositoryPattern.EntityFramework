@@ -2,6 +2,6 @@
 {
     public interface ISeedService
     {
-        Task InitializeAsync();
+        Task EnsureDataAsync();
     }
 }

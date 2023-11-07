@@ -4,7 +4,7 @@ using RepositoryPattern.Data.Repositories;
 
 namespace RepositoryPattern.Data.UoW
 {
-    public interface IUserUnitOfWork : IGenericUnitOfWork<DataContext>
+    public interface IUserUnitOfWork : IGenericUnitOfWork<ApiContext>
     {
         IGroupRepository GroupRepository { get; }
         IItemRepository ItemRepository { get; }

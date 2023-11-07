@@ -14,6 +14,9 @@ namespace RepositoryPattern.Api.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                    return UnprocessableEntity(ModelState);
+
                 await _groupService.PutAsync(id, model);
                 return NoContent();
             }

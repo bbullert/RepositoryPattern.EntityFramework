@@ -14,9 +14,10 @@ namespace RepositoryPattern.Core.Services
 
         public async Task<IEnumerable<Guid>> CreateBulkAsync(IEnumerable<UserBulkCreateItem> users)
         {
-            _userUnitOfWork.BeginTransaction();
             try
             {
+                _userUnitOfWork.BeginTransaction();
+
                 var ids = await _userUnitOfWork.UserRepository.AddRangeAsync(
                     x => x.Id, users.Select(x => x.ToEntity()));
 
